@@ -1,11 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Makiavello — рецензии и статьи об искусстве: живопись, музыка, книги. Проект Paullknya.">
   <title>Makiavello · рецензии на искусство</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -19,12 +18,11 @@
       color: #eef2f5;
       font-family: 'Inter', sans-serif;
       line-height: 1.55;
-      scroll-behavior: smooth;
     }
 
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #1a1d21; }
-    ::-webkit-scrollbar-thumb { background: #b33b2c; border-radius: 20px; }
+    ::-webkit-scrollbar-thumb { background: #e34d4d; border-radius: 20px; }
 
     .container {
       max-width: 1280px;
@@ -36,9 +34,9 @@
     .header {
       position: sticky;
       top: 0;
-      background: rgba(10, 12, 14, 0.92);
+      background: rgba(10, 12, 14, 0.95);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(179, 59, 44, 0.4);
+      border-bottom: 1px solid rgba(227, 77, 77, 0.4);
       z-index: 1000;
       padding: 18px 0;
     }
@@ -54,9 +52,8 @@
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
       text-decoration: none;
-      background: linear-gradient(145deg, #f5e7d9, #b33b2c);
+      background: linear-gradient(145deg, #f5e7d9, #e34d4d);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
@@ -85,8 +82,8 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #b33b2c;
-      transition: width 0.2s ease;
+      background: #e34d4d;
+      transition: width 0.2s;
     }
 
     .nav-links a:hover::after,
@@ -95,30 +92,29 @@
     }
 
     .nav-links a:hover {
-      color: #d95c4a;
+      color: #e34d4d;
     }
 
     .menu-toggle {
       display: none;
       font-size: 1.8rem;
       cursor: pointer;
-      color: #b33b2c;
+      color: #e34d4d;
     }
 
-    /* hero — с элементом «медузной» крупной шапки */
+    /* hero */
     .hero {
       padding: 80px 0 64px;
       text-align: center;
       background: radial-gradient(circle at 20% 30%, #121518, #0a0c0e 70%);
-      border-bottom: 1px solid rgba(179, 59, 44, 0.25);
+      border-bottom: 1px solid rgba(227, 77, 77, 0.25);
     }
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: 4rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
-      background: linear-gradient(145deg, #fff, #d48c7c);
+      background: linear-gradient(145deg, #fff, #e34d4d);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
@@ -133,16 +129,14 @@
 
     .hero .tagline {
       margin-top: 18px;
-      font-size: 1rem;
       font-style: italic;
-      color: #b66b5a;
-      letter-spacing: 0.2px;
+      color: #e07a6a;
     }
 
-    /* секции */
+    /* sections */
     .section {
       padding: 80px 0 70px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .section-title {
@@ -152,7 +146,6 @@
       margin-bottom: 48px;
       position: relative;
       display: inline-block;
-      letter-spacing: -0.01em;
     }
 
     .section-title:after {
@@ -162,56 +155,55 @@
       left: 0;
       width: 70px;
       height: 3px;
-      background: #b33b2c;
+      background: #e34d4d;
       border-radius: 3px;
     }
 
-    /* карточки — в стиле Meduza, но тёмные */
+    /* cards grid */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 36px;
+      gap: 40px;
     }
 
     .card {
       background: #121517;
       border-radius: 28px;
-      padding: 28px 26px;
-      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-      border: 1px solid rgba(179, 59, 44, 0.2);
-      box-shadow: 0 18px 30px -12px rgba(0, 0, 0, 0.5);
+      padding: 28px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(227, 77, 77, 0.2);
+      box-shadow: 0 18px 30px -12px rgba(0,0,0,0.5);
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      border-color: #b33b2c;
+      transform: translateY(-6px);
+      border-color: #e34d4d;
       background: #181c1f;
-      box-shadow: 0 28px 36px -14px rgba(0, 0, 0, 0.7);
     }
 
     .card-icon {
-      font-size: 2.6rem;
-      color: #b33b2c;
-      margin-bottom: 18px;
+      font-size: 2.5rem;
+      color: #e34d4d;
+      margin-bottom: 20px;
     }
 
     .card-category {
-      display: inline-block;
       font-size: 0.7rem;
       text-transform: uppercase;
       font-weight: 600;
       letter-spacing: 1.5px;
-      background: rgba(179, 59, 44, 0.25);
+      background: rgba(227, 77, 77, 0.2);
       padding: 5px 12px;
       border-radius: 40px;
-      color: #e0a594;
+      display: inline-block;
       margin-bottom: 16px;
+      color: #e07a6a;
     }
 
     .card h3 {
       font-size: 1.7rem;
-      font-weight: 700;
       font-family: 'Playfair Display', serif;
+      font-weight: 700;
       margin-bottom: 12px;
       line-height: 1.3;
     }
@@ -222,28 +214,24 @@
       margin-bottom: 16px;
       display: flex;
       gap: 14px;
-      align-items: center;
       flex-wrap: wrap;
     }
 
     .rating {
-      color: #b33b2c;
+      color: #e34d4d;
       font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .card p {
       color: #cbd5e6;
-      margin: 0 0 22px 0;
+      margin-bottom: 22px;
       line-height: 1.5;
     }
 
     .btn-outline {
       background: transparent;
-      border: 1px solid #b33b2c;
-      color: #b33b2c;
+      border: 1px solid #e34d4d;
+      color: #e34d4d;
       padding: 8px 24px;
       border-radius: 40px;
       font-weight: 500;
@@ -252,13 +240,12 @@
       transition: 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-outline:hover {
-      background: #b33b2c;
+      background: #e34d4d;
       color: #0a0c0e;
-      border-color: #b33b2c;
     }
 
     /* about */
@@ -269,20 +256,9 @@
       align-items: center;
     }
 
-    .about-text {
-      flex: 2;
-    }
-
-    .about-text h3 {
-      font-size: 2rem;
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 20px;
-    }
-
-    .about-text p {
-      margin-bottom: 20px;
-      color: #cbd5e6;
-    }
+    .about-text { flex: 2; }
+    .about-text h3 { font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 20px; }
+    .about-text p { margin-bottom: 20px; color: #cbd5e6; }
 
     .about-icon {
       flex: 1;
@@ -292,18 +268,12 @@
       border-radius: 48px;
       border: 1px solid #2a2f33;
     }
-
-    .about-icon i {
-      font-size: 5rem;
-      color: #b33b2c;
-      margin-bottom: 16px;
-    }
-
+    .about-icon i { font-size: 5rem; color: #e34d4d; margin-bottom: 16px; }
     .quote {
       margin-top: 28px;
-      font-style: italic;
-      border-left: 4px solid #b33b2c;
+      border-left: 4px solid #e34d4d;
       padding-left: 24px;
+      font-style: italic;
       color: #e0cba0;
     }
 
@@ -312,40 +282,33 @@
       background: #050708;
       padding: 52px 0 36px;
       text-align: center;
-      border-top: 1px solid rgba(179, 59, 44, 0.4);
+      border-top: 1px solid rgba(227, 77, 77, 0.4);
     }
-
     .socials {
       display: flex;
       justify-content: center;
       gap: 32px;
       margin-bottom: 28px;
     }
-
     .socials a {
       color: #9aa7b9;
       font-size: 1.6rem;
       transition: 0.2s;
     }
+    .socials a:hover { color: #e34d4d; transform: translateY(-4px); }
 
-    .socials a:hover {
-      color: #b33b2c;
-      transform: translateY(-4px);
-    }
-
-    /* модалка — увеличенная, как отдельная статья */
+    /* modal */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.88);
+      background: rgba(0,0,0,0.88);
       backdrop-filter: blur(10px);
       justify-content: center;
       align-items: center;
       z-index: 2000;
     }
-
     .modal-content {
       background: #121517;
       max-width: 800px;
@@ -354,35 +317,20 @@
       overflow-y: auto;
       padding: 32px 36px;
       border-radius: 36px;
-      border-top: 5px solid #b33b2c;
-      box-shadow: 0 40px 60px -20px black;
-      font-size: 1rem;
+      border-top: 5px solid #e34d4d;
     }
-
     .modal-content h2 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
-      margin-bottom: 16px;
-      color: #f0ede8;
+      margin-bottom: 20px;
     }
-
     .modal-content p {
       margin-bottom: 1.2rem;
       line-height: 1.65;
       color: #dee4ed;
     }
-
-    .modal-content strong {
-      color: #d95c4a;
-    }
-
-    .modal-content hr {
-      margin: 20px 0;
-      border-color: #2a2f33;
-    }
-
     .close-modal {
-      background: #b33b2c;
+      background: #e34d4d;
       border: none;
       padding: 10px 28px;
       border-radius: 50px;
@@ -390,7 +338,6 @@
       cursor: pointer;
       margin-top: 20px;
       color: #0a0c0e;
-      font-size: 0.9rem;
     }
 
     /* responsive */
@@ -407,19 +354,20 @@
         flex-direction: column;
         padding: 40px 32px;
         gap: 2rem;
-        transition: left 0.25s ease;
-        border-right: 2px solid #b33b2c;
+        transition: left 0.25s;
+        border-right: 2px solid #e34d4d;
         z-index: 999;
       }
       .nav-links.active { left: 0; }
       .hero h1 { font-size: 2.5rem; }
       .section-title { font-size: 2rem; }
-      .cards-grid { grid-template-columns: 1fr; gap: 28px; }
+      .cards-grid { gap: 28px; }
       .modal-content { padding: 24px; }
     }
   </style>
 </head>
 <body>
+
 <header class="header">
   <div class="container nav-wrapper">
     <div class="logo"><a href="#">Makiavello</a></div>
@@ -438,104 +386,90 @@
     <div class="container">
       <h1>Makiavello</h1>
       <p>Рецензии, которые не боятся власти. Живопись, музыка, книги — искусство как поле битвы.</p>
-      <div class="tagline">«Никколо Макиавелли одобрил бы это читалище» — Paullknya</div>
+      <div class="tagline">«Никколо Макиавелли одобрил бы это читалище»</div>
     </div>
   </section>
 
   <section id="reviews" class="section">
     <div class="container">
-      <h2 class="section-title">Большие рецензии</h2>
+      <h2 class="section-title">Рецензии</h2>
       <div class="cards-grid">
-        <!-- Рецензия 1: живопись -->
         <div class="card">
           <div class="card-icon"><i class="fas fa-palette"></i></div>
           <span class="card-category">Живопись</span>
           <h3>Страшный суд · Микеланджело</h3>
-          <div class="meta"><span>Сикстинская капелла, 1536–1541</span><span class="rating"><i class="fas fa-star"></i> 9.5/10</span></div>
-          <p>Фреска, где мускулы святых хлещут по глазам, а адские лодки Харона смахивают на политическую карикатуру. Это не просто религия — это манифест страха и надежды.</p>
+          <div class="meta"><span>1536–1541</span><span class="rating"><i class="fas fa-star"></i> 9.5/10</span></div>
+          <p>Фреска, где мускулы святых хлещут по глазам, а адские лодки Харона смахивают на политическую карикатуру...</p>
           <button class="btn-outline read-more-btn" data-title="Страшный суд · Микеланджело" data-fulltext="
-            <p>Когда папа Павел III увидел «Страшный суд», он упал на колени. Не от святости — от ужаса. Микеланджело написал Христа не милующим, а похожим на разгневанного Зевса. А Богородица, вместо того чтобы заступаться, жмётся к нему с лицом, полным смирения.</p>
-            <p>Но самое страшное — это тела. Мышцы, сухожилия, искривлённые спины. Микеланджело превратил ад в анатомический театр. Харон переправляет грешников, Минос с ослиными ушами запутывается в змеях (злая пародия на папского церемониймейстера). А в центре — Христос-мясник. Никакого прощения.</p>
-            <p>Макиавелли бы понял: власть не может быть мягкой. Искусство, которое хочет изменить, должно бить прямо в солнечное сплетение. «Страшный суд» — это не фреска, это пощёчина.</p>
-            <p><strong>Итог:</strong> 9.5/10. Смотреть в оригинале, пока не отреставрировали фиговые листки.</p>
+            <p>Когда папа Павел III увидел «Страшный суд», он упал на колени. Не от святости — от ужаса. Микеланджело написал Христа не милующим, а похожим на разгневанного Зевса.</p>
+            <p>Но самое страшное — это тела. Мышцы, сухожилия, искривлённые спины. Микеланджело превратил ад в анатомический театр.</p>
+            <p>Макиавелли бы понял: власть не может быть мягкой. «Страшный суд» — это не фреска, это пощёчина.</p>
           "><i class="fas fa-scroll"></i> Читать рецензию</button>
         </div>
-
-        <!-- Рецензия 2: музыка -->
         <div class="card">
           <div class="card-icon"><i class="fas fa-head-side-vr"></i></div>
           <span class="card-category">Музыка</span>
           <h3>The Dark Side of the Moon</h3>
           <div class="meta"><span>Pink Floyd · 1973</span><span class="rating"><i class="fas fa-star"></i> 10/10</span></div>
-          <p>Психоделическая опера о том, как деньги, безумие и время разрывают человека на части. 50 лет спустя — актуальнее, чем любой политический манифест.</p>
+          <p>Психоделическая опера о том, как деньги, безумие и время разрывают человека на части...</p>
           <button class="btn-outline read-more-btn" data-title="The Dark Side of the Moon" data-fulltext="
-            <p>Кассовые аппараты в начале «Money» — это самый точный звук XX века. Pink Floyd записали не просто альбом, а учебник по акустической шизофрении. От биения сердца до голосов менеджеров аэропорта — каждая деталь работает на идею: мы все идём по тонкой грани.</p>
-            <p>«Time» начинается с безумного перезвона часов, а потом гитара Гилмора просто хоронит любой оптимизм. Слова «Никто не говорил тебе, что жизнь будет такой» стали эпитафией для целого поколения.</p>
-            <p>Но самое макиавеллиевское здесь — «Us and Them». Вальсовый ритм, саксофон, а в тексте — война как вечный двигатель. Мир без конфликта невозможен, и музыка это знает.</p>
-            <p>Вердикт: 10/10. Слушать на виниле, в темноте, с хорошими наушниками. И не вздумайте включать на фоне.</p>
+            <p>Кассовые аппараты в начале «Money» — это самый точный звук XX века. Pink Floyd записали не просто альбом, а учебник по акустической шизофрении.</p>
+            <p>«Time» начинается с безумного перезвона часов, а потом гитара Гилмора просто хоронит любой оптимизм.</p>
+            <p>Вердикт: 10/10. Слушать на виниле, в темноте.</p>
           "><i class="fas fa-scroll"></i> Читать рецензию</button>
         </div>
-
-        <!-- Рецензия 3: книга -->
         <div class="card">
           <div class="card-icon"><i class="fas fa-book-open"></i></div>
           <span class="card-category">Книги</span>
           <h3>1984 · Джордж Оруэлл</h3>
-          <div class="meta"><span>Антиутопия, 1949</span><span class="rating"><i class="fas fa-star"></i> 9.8/10</span></div>
-          <p>Страшнее всего в «1984» не пыточные комнаты, а та, как легко язык превращается в тюрьму. Уинстон Смит проигрывает, но его дневник остаётся.</p>
+          <div class="meta"><span>1949</span><span class="rating"><i class="fas fa-star"></i> 9.8/10</span></div>
+          <p>Страшнее всего в «1984» не пыточные комнаты, а то, как легко язык превращается в тюрьму...</p>
           <button class="btn-outline read-more-btn" data-title="1984 · Джордж Оруэлл" data-fulltext="
-            <p>Большинство читателей боится Большого Брата. Но настоящий кошмар — это двумысл. «Война — это мир. Свобода — это рабство. Незнание — сила». Оруэлл предупреждал: когда слова теряют значение, человек перестаёт быть человеком.</p>
-            <p>Роман написан за два года до смерти автора, в лондонской сырости. Оруэлл сам участвовал в гражданской войне в Испании, видел, как идеология пожирает правду. Именно поэтому сцена с 101-й комнатой (самый большой страх) — не фантастика, а психологический отчёт.</p>
-            <p>Уинстон Смит любит Джулию, но его любовь раздавливают крысами. Финал — предательство. Он не становится героем. Но он оставляет дневник. И этот дневник читаем мы.</p>
-            <p>Мораль Макиавелли: если хочешь сохранить власть над собой — пиши. Даже если тебя заставят любить партию.</p>
+            <p>Большинство читателей боится Большого Брата. Но настоящий кошмар — это двумысл. «Война — это мир. Свобода — это рабство. Незнание — сила».</p>
+            <p>Уинстон Смит любит Джулию, но его любовь раздавливают крысами. Финал — предательство.</p>
+            <p>Мораль Макиавелли: если хочешь сохранить власть над собой — пиши.</p>
           "><i class="fas fa-scroll"></i> Читать рецензию</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Секция статей (статические, но тоже с расширенным модалом) -->
   <section id="articles" class="section">
     <div class="container">
-      <h2 class="section-title">Эссе и статьи</h2>
+      <h2 class="section-title">Статьи</h2>
       <div class="cards-grid">
         <div class="card">
           <div class="card-icon"><i class="fas fa-crown"></i></div>
           <span class="card-category">Политика & Искусство</span>
-          <h3>Макиавелли и художники: 5 уроков власти</h3>
-          <div class="meta">12 мин чтения · Paullknya</div>
-          <p>Как флорентийский дипломат объясняет жестокость Караваджо, интриги Бернини и почему современный куратор — всегда немного государь.</p>
+          <h3>Макиавелли и художники</h3>
+          <div class="meta">12 мин чтения</div>
+          <p>Как флорентийский дипломат объясняет жестокость Караваджо, интриги Бернини...</p>
           <button class="btn-outline read-more-btn" data-title="Макиавелли и художники" data-fulltext="
-            <p><strong>Урок 1. Лучше, чтобы тебя боялись, чем любили.</strong> Караваджо не искал покровительства — он рубил правду-матку грязными ногтями. Его алтарные образы шокировали клиентов, но это был расчёт: скандал = слава.</p>
-            <p><strong>Урок 2. Лиса и лев.</strong> Рафаэль был львом (сила, величие), а Микеланджело — лисой (обходные пути, анатомия). Выжил тот, кто сочетал.</p>
-            <p><strong>Урок 3. Не трогать женщин и кошельки.</strong> Художники эпохи Возрождения знали: заказчика нельзя унижать. Но можно мягко шантажировать гениальностью.</p>
-            <p><strong>Урок 4. Война как искусство.</strong> Леонардо проектировал танки. Искусство без инженерии мертво.</p>
-            <p><strong>Урок 5. Добродетель против фортуны.</strong> Тициан умер в 90 лет с кистью в руке, пережив чуму и войны. Упорство побеждает случай.</p>
+            <p><strong>Урок 1.</strong> Лучше, чтобы тебя боялись, чем любили. Караваджо не искал покровительства — он рубил правду-матку.</p>
+            <p><strong>Урок 2.</strong> Лиса и лев. Рафаэль был львом, Микеланджело — лисой.</p>
+            <p><strong>Урок 3.</strong> Не трогать женщин и кошельки. Художники знали: заказчика нельзя унижать.</p>
           "><i class="fas fa-scroll"></i> Читать статью</button>
         </div>
         <div class="card">
           <div class="card-icon"><i class="fas fa-guitar"></i></div>
           <span class="card-category">Музыкальная философия</span>
-          <h3>Симфония диссонанса: протест в нотах</h3>
-          <div class="meta">8 мин чтения · Paullknya</div>
-          <p>От Бетховена до Rage Against the Machine: как музыка становилась формой неповиновения. Диссонанс как политический акт.</p>
+          <h3>Симфония диссонанса</h3>
+          <div class="meta">8 мин чтения</div>
+          <p>От Бетховена до Rage Against the Machine: как музыка становилась формой неповиновения...</p>
           <button class="btn-outline read-more-btn" data-title="Симфония диссонанса" data-fulltext="
-            <p>Когда Бетховен вычеркнул посвящение Наполеону из «Героической симфонии», он совершил жест, равный публичному плевку. Музыка перестала быть развлечением.</p>
-            <p>Шостакович в Ленинградской симфонии спрятал код: нацистский марш звучит фальшиво, потом его разрывают на части. Советская цензура не поняла, но слушатели — да.</p>
-            <p>В конце XX века Rage Against the Machine просто зачитывает прокламации под хардкор-рифы. Их гитара — не музыка, а оружие. Диссонанс нужен, чтобы поломать шаблон.</p>
-            <p>Вывод: музыка, которая не режет слух, — это музыка без власти. Макиавелли оценил бы.</p>
+            <p>Когда Бетховен вычеркнул посвящение Наполеону из «Героической симфонии», он совершил жест, равный публичному плевку.</p>
+            <p>Шостакович в Ленинградской симфонии спрятал код: нацистский марш звучит фальшиво, потом его разрывают на части.</p>
           "><i class="fas fa-scroll"></i> Читать статью</button>
         </div>
         <div class="card">
           <div class="card-icon"><i class="fas fa-landmark"></i></div>
           <span class="card-category">Литературоведение</span>
           <h3>Роман как зеркало тирании</h3>
-          <div class="meta">10 мин чтения · Paullknya</div>
-          <p>От «Процесса» Кафки до «Повелителя мух». Как литература обнажает механизмы власти без прикрас.</p>
+          <div class="meta">10 мин чтения</div>
+          <p>От «Процесса» Кафки до «Повелителя мух». Как литература обнажает механизмы власти...</p>
           <button class="btn-outline read-more-btn" data-title="Роман как зеркало тирании" data-fulltext="
-            <p>Кафка не писал про бюрократию — он писал про экзистенциальный ужас человека, который даже не знает, в чём его обвиняют. «Процесс» — это манифест беспомощности. Иосиф К. умрёт, как собака. Система победит.</p>
-            <p>«Повелитель мух» Голдинга: дети на необитаемом острове за пару недель создают культ, иерархию и убийство. И никакой внешней власти не нужно — достаточно нескольких свиных голов.</p>
-            <p>А ещё Набоков, Оруэлл, Замятин — все они пишут одну историю: человек против машины. Макиавелли бы сказал: чтобы понять власть, прочитай роман. Там правда без прикрас.</p>
+            <p>Кафка не писал про бюрократию — он писал про экзистенциальный ужас человека, который даже не знает, в чём его обвиняют.</p>
+            <p>«Повелитель мух» Голдинга: дети на необитаемом острове за пару недель создают культ, иерархию и убийство.</p>
           "><i class="fas fa-scroll"></i> Читать статью</button>
         </div>
       </div>
@@ -548,9 +482,137 @@
       <div class="about-wrapper">
         <div class="about-text">
           <h3>Paullknya — созерцатель власти в искусстве</h3>
-          <p>Историк искусства, независимый критик. Мои тексты — это всегда попытка залезть под кожу картины, сонаты или романа. Я ищу там конфликты, волю и, конечно, эстетику.</p>
-          <p>Вдохновляюсь Никколо Макиавелли (не зря же название), ренессансной дипломатией, музыкой пост-панка и чёрным кофе. Makiavello — не просто блог, а лаборатория, где искусство перестаёт быть вежливым.</p>
-          <div class="quote">
-            «Хорошая рецензия должна ранить. Как удар кинжалом — коротко и со смыслом».
-            <br>— Paullknya
-   
+          <p>Историк искусства, независимый критик. Мои тексты — это всегда попытка залезть под кожу картины, сонаты или романа.</p>
+          <div class="quote">«Хорошая рецензия должна ранить. Как удар кинжалом — коротко и со смыслом».</div>
+        </div>
+        <div class="about-icon">
+          <i class="fas fa-feather-alt"></i>
+          <h4>Paullknya</h4>
+          <p style="color:#e34d4d;">✧ критик, эссеист ✧</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="socials">
+      <a href="#"><i class="fab fa-telegram"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-x-twitter"></i></a>
+    </div>
+    <p>© 2025 Makiavello — рецензии на искусство. Проект Paullknya.</p>
+  </div>
+</footer>
+
+<div id="modal" class="modal">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+  (function() {
+    // --- Мобильное меню ---
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    if (menuBtn && navLinks) {
+      menuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle('active');
+      });
+      // Закрытие при клике на ссылку
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+
+    // --- Плавный скролл ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === "#" || href === "") return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // --- Модальные окна для кнопок ---
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+
+    function showModal(title, htmlText) {
+      modalContent.innerHTML = `
+        <h2>${escapeHtml(title)}</h2>
+        <div>${htmlText}</div>
+        <button class="close-modal" id="closeModalBtn">✕ Закрыть</button>
+      `;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      const closeBtn = document.getElementById('closeModalBtn');
+      if (closeBtn) closeBtn.addEventListener('click', hideModal);
+    }
+
+    function hideModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) hideModal();
+    });
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+      });
+    }
+
+    // Вешаем обработчики на все кнопки .read-more-btn
+    const buttons = document.querySelectorAll('.read-more-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const title = this.getAttribute('data-title') || 'Рецензия';
+        const fulltext = this.getAttribute('data-fulltext') || '<p>Текст временно отсутствует.</p>';
+        showModal(title, fulltext);
+      });
+    });
+
+    // --- Активный пункт меню при скролле ---
+    const sections = document.querySelectorAll('section[id]');
+    function setActiveNav() {
+      let current = '';
+      const scrollPos = window.scrollY + 120;
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          current = section.getAttribute('id');
+        }
+      });
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}` && current) {
+          link.classList.add('active');
+        }
+      });
+      if (window.scrollY < 100) {
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        const homeLink = document.querySelector('a[href="#home"]');
+        if (homeLink) homeLink.classList.add('active');
+      }
+    }
+    window.addEventListener('scroll', setActiveNav);
+    window.addEventListener('load', setActiveNav);
+  })();
+</script>
+</body>
+</html>
