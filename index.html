@@ -8,595 +8,133 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html {
-      background: #0a0c0e;
-      overscroll-behavior: none;
-    }
-    body {
-      background: #0a0c0e;
-      color: #eef2f5;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.55;
-    }
-    button:focus, a:focus {
-      outline: none;
-      box-shadow: none;
-    }
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1a1d21;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #e34d4d;
-      border-radius: 20px;
-    }
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 28px;
-    }
-    .header {
-      position: sticky;
-      top: 0;
-      background: rgba(10,12,14,0.95);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(227,77,77,0.4);
-      z-index: 1000;
-      padding: 18px 0;
-    }
-    .nav-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .logo a {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      background: linear-gradient(145deg, #f5e7d9, #e34d4d);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      flex-wrap: wrap;
-    }
-    .nav-links a {
-      color: #eef2f5;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: 0.2s;
-      position: relative;
-      padding-bottom: 4px;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #e34d4d;
-      transition: width 0.2s;
-    }
-    .nav-links a:hover::after,
-    .nav-links a.active::after {
-      width: 100%;
-    }
-    .nav-links a:hover {
-      color: #e34d4d;
-    }
-    .menu-toggle {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: #e34d4d;
-    }
-    /* Бургер-меню на мобилках */
-    @media (max-width: 780px) {
-      .menu-toggle {
-        display: block;
-      }
-      .nav-links {
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        width: 70%;
-        height: calc(100vh - 80px);
-        background: #0f1215f2;
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        padding: 40px 32px;
-        gap: 2rem;
-        transition: left 0.25s;
-        border-right: 2px solid #e34d4d;
-        z-index: 999;
-      }
-      .nav-links.active {
-        left: 0;
-      }
-    }
-    /* Прогресс-бар */
-    .progress-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: transparent;
-      z-index: 1002;
-    }
-    .progress-bar {
-      height: 3px;
-      background: #e34d4d;
-      width: 0%;
-      transition: width 0.1s ease-out;
-    }
-    /* Герой */
-    .hero {
-      padding: 80px 0 64px;
-      text-align: center;
-      background: radial-gradient(circle at 20% 30%, #121518, #0a0c0e 70%);
-      border-bottom: 1px solid rgba(227,77,77,0.25);
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      font-weight: 700;
-      background: linear-gradient(145deg, #fff, #e34d4d);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      max-width: 720px;
-      margin: 20px auto 0;
-      color: #b8c1ce;
-    }
-    .hero .tagline {
-      margin-top: 18px;
-      font-style: italic;
-      color: #e07a6a;
-    }
-    /* Мегабаннер (компактный) */
-    .mega-banner {
-      background: linear-gradient(135deg, #171d22 0%, #121517 100%);
-      border-radius: 2rem;
-      margin: 48px 0 24px;
-      padding: 32px 36px;
-      border: 1px solid rgba(227,77,77,0.3);
-      box-shadow: 0 20px 35px -12px black;
-    }
-    .mega-content {
-      flex: 2;
-    }
-    .mega-icon {
-      font-size: 4rem;
-      color: #e34d4d;
-      margin-bottom: 16px;
-    }
-    .mega-banner h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      margin-bottom: 12px;
-    }
-    .mega-banner .meta {
-      color: #9aa7b9;
-      margin-bottom: 16px;
-      display: flex;
-      gap: 20px;
-    }
-    .mega-banner p {
-      color: #cbd5e6;
-      margin-bottom: 24px;
-      line-height: 1.5;
-    }
-    /* Мини‑сетка (короткие рецензии) */
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-bottom: 60px;
-    }
-    .mini-card {
-      background: #121517;
-      border-radius: 24px;
-      padding: 20px;
-      border: 1px solid rgba(227,77,77,0.2);
-      transition: all 0.2s;
-    }
-    .mini-card:hover {
-      border-color: #e34d4d;
-      background: #181c1f;
-      transform: translateY(-4px);
-    }
-    .mini-card h3 {
-      font-size: 1.3rem;
-      margin: 8px 0;
-    }
-    .mini-card .mini-meta {
-      font-size: 0.75rem;
-      color: #8e9aaf;
-      margin-bottom: 8px;
-    }
-    /* Строка поиска */
-    .search-container {
-      margin: 40px 0 20px;
-    }
-    #searchInput {
-      width: 100%;
-      max-width: 400px;
-      padding: 12px 20px;
-      background: #121517;
-      border: 1px solid rgba(227,77,77,0.4);
-      border-radius: 40px;
-      color: #eef2f5;
-      font-size: 1rem;
-      transition: 0.2s;
-    }
-    #searchInput:focus {
-      outline: none;
-      border-color: #e34d4d;
-    }
-    .section {
-      padding: 80px 0 70px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
-      font-weight: 600;
-      margin-bottom: 48px;
-      position: relative;
-      display: inline-block;
-    }
-    .section-title:after {
-      content: '';
-      position: absolute;
-      bottom: -14px;
-      left: 0;
-      width: 70px;
-      height: 3px;
-      background: #e34d4d;
-      border-radius: 3px;
-    }
-    /* Горизонтальные чарты (карусель) */
-    .horizontal-scroll {
-      display: flex;
-      overflow-x: auto;
-      gap: 30px;
-      padding-bottom: 15px;
-      scrollbar-width: thin;
-    }
-    .horizontal-scroll .card {
-      flex: 0 0 320px;
-      margin-bottom: 0;
-    }
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 40px;
-    }
-    .card {
-      background: #121517;
-      border-radius: 28px;
-      padding: 28px;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(227,77,77,0.2);
-      box-shadow: 0 18px 30px -12px rgba(0,0,0,0.5);
-      opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s, border 0.3s;
-    }
-    .card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: #e34d4d;
-      background: #181c1f;
-    }
-    .card-icon {
-      font-size: 2.5rem;
-      color: #e34d4d;
-      margin-bottom: 20px;
-    }
-    .card-category {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      background: rgba(227,77,77,0.2);
-      padding: 5px 12px;
-      border-radius: 40px;
-      display: inline-block;
-      margin-bottom: 16px;
-      color: #e07a6a;
-    }
-    .card h3 {
-      font-size: 1.7rem;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-    .card .meta {
-      font-size: 0.85rem;
-      color: #8e9aaf;
-      margin-bottom: 16px;
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .rating {
-      color: #e34d4d;
-      font-weight: 600;
-    }
-    .card p {
-      color: #cbd5e6;
-      margin-bottom: 22px;
-      line-height: 1.5;
-    }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid #e34d4d;
-      color: #e34d4d;
-      padding: 8px 24px;
-      border-radius: 40px;
-      font-weight: 500;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-outline:hover {
-      background: #e34d4d;
-      color: #0a0c0e;
-    }
-    .about-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 56px;
-      align-items: center;
-    }
-    .about-text {
-      flex: 2;
-    }
-    .about-text h3 {
-      font-size: 2rem;
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 20px;
-    }
-    .about-text p {
-      margin-bottom: 20px;
-      color: #cbd5e6;
-    }
-    .about-icon {
-      flex: 1;
-      text-align: center;
-      background: linear-gradient(145deg, #151a1e, #0a0c0e);
-      padding: 42px 20px;
-      border-radius: 48px;
-      border: 1px solid #2a2f33;
-    }
-    .about-icon i {
-      font-size: 5rem;
-      color: #e34d4d;
-      margin-bottom: 16px;
-    }
-    .quote {
-      margin-top: 28px;
-      border-left: 4px solid #e34d4d;
-      padding-left: 24px;
-      font-style: italic;
-      color: #e0cba0;
-    }
-    .footer {
-      background: #050708;
-      padding: 52px 0 36px;
-      text-align: center;
-      border-top: 1px solid rgba(227,77,77,0.4);
-    }
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      margin-bottom: 28px;
-    }
-    .socials a {
-      color: #9aa7b9;
-      font-size: 1.6rem;
-      transition: 0.2s;
-    }
-    .socials a:hover {
-      color: #e34d4d;
-      transform: translateY(-4px);
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.88);
-      backdrop-filter: blur(10px);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-    .modal-content {
-      background: #121517;
-      max-width: 800px;
-      width: 90%;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 32px 36px;
-      border-radius: 36px;
-      border-top: 5px solid #e34d4d;
-    }
-    .modal-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    .modal-content p {
-      margin-bottom: 1.2rem;
-      line-height: 1.65;
-      color: #dee4ed;
-    }
-    .close-modal {
-      background: #e34d4d;
-      border: none;
-      padding: 10px 28px;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 20px;
-      color: #0a0c0e;
-    }
-    /* Кнопка-маска (заглушка) */
-    .machiavelli-button {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 68px;
-      height: 68px;
-      background: #1e1a16;
-      border-radius: 50%;
-      box-shadow: 0 0 0 2px #e34d4d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 1500;
-      transition: transform 0.2s, background 0.2s;
-      animation: levitate 3s infinite ease-in-out;
-      border: none;
-    }
-    .machiavelli-button i {
-      font-size: 2.2rem;
-      color: #e34d4d;
-    }
-    .machiavelli-button:hover {
-      transform: scale(1.05);
-      background: #2c241e;
-    }
-    @keyframes levitate {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0px); }
-    }
-    .toast {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      background: #1e1a16;
-      backdrop-filter: blur(10px);
-      color: #f0e6d8;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border-left: 4px solid #e34d4d;
-      z-index: 1600;
-      opacity: 0;
-      transform: translateX(30px);
-      transition: opacity 0.2s, transform 0.2s;
-      pointer-events: none;
-      max-width: 280px;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    /* Секретное меню (долгое нажатие) */
-    .secret-menu {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      background: #1e1a16dd;
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      border: 1px solid #e34d4d;
-      padding: 12px 0;
-      min-width: 170px;
-      z-index: 1550;
-      display: none;
-      flex-direction: column;
-    }
-    .secret-menu a {
-      color: #f0e6d8;
-      padding: 8px 20px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: 0.1s;
-    }
-    .secret-menu a:hover {
-      background: #e34d4d;
-      color: #0a0c0e;
-    }
-    @media (max-width: 780px) {
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      .section-title {
-        font-size: 2rem;
-      }
-      .mini-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .horizontal-scroll .card {
-        flex: 0 0 280px;
-      }
-      .modal-content {
-        padding: 24px;
-      }
-      .machiavelli-button {
-        width: 56px;
-        height: 56px;
-        bottom: 16px;
-        right: 16px;
-      }
-      .machiavelli-button i {
-        font-size: 1.8rem;
-      }
-      .toast {
-        bottom: 90px;
-        right: 20px;
-      }
-      .mega-banner {
-        padding: 24px;
-      }
-      .secret-menu {
-        bottom: 90px;
-        right: 20px;
-      }
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { background: #0a0c0e; overscroll-behavior: none; }
+    body { background: #0a0c0e; color: #eef2f5; font-family: 'Inter', sans-serif; line-height: 1.55; transition: background 0.3s, color 0.3s; }
+    button:focus, a:focus { outline: none; box-shadow: none; }
+    ::-webkit-scrollbar { width: 8px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #1a1d21; }
+    ::-webkit-scrollbar-thumb { background: #e34d4d; border-radius: 20px; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+    .header { position: sticky; top: 0; background: rgba(10,12,14,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(227,77,77,0.4); z-index: 1000; padding: 18px 0; transition: transform 0.6s cubic-bezier(0.2,0.9,0.4,1.1); }
+    .nav-wrapper { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .logo a { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; background: linear-gradient(145deg, #f5e7d9, #e34d4d); background-clip: text; -webkit-background-clip: text; color: transparent; text-decoration: none; cursor: pointer; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a { color: #eef2f5; text-decoration: none; font-weight: 500; font-size: 1rem; transition: 0.2s; position: relative; padding-bottom: 4px; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: #e34d4d; transition: width 0.2s; }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-links a:hover { color: #e34d4d; }
+    .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: #e34d4d; }
+    @media (max-width: 780px) { .menu-toggle { display: block; } .nav-links { position: fixed; top: 80px; left: -100%; width: 70%; height: calc(100vh - 80px); background: #0f1215f2; backdrop-filter: blur(20px); flex-direction: column; padding: 40px 32px; gap: 2rem; transition: left 0.25s; border-right: 2px solid #e34d4d; z-index: 999; } .nav-links.active { left: 0; } }
+    .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: transparent; z-index: 1002; }
+    .progress-bar { height: 3px; background: #e34d4d; width: 0%; transition: width 0.1s ease-out; }
+    .hero { padding: 80px 0 64px; text-align: center; background: radial-gradient(circle at 20% 30%, #121518, #0a0c0e 70%); border-bottom: 1px solid rgba(227,77,77,0.25); transition: transform 0.6s cubic-bezier(0.2,0.9,0.4,1.1); }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 700; background: linear-gradient(145deg, #fff, #e34d4d); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .hero p { font-size: 1.25rem; max-width: 720px; margin: 20px auto 0; color: #b8c1ce; }
+    .hero .tagline { margin-top: 18px; font-style: italic; color: #e07a6a; }
+    .mega-banner { background: linear-gradient(135deg, #171d22 0%, #121517 100%); border-radius: 2rem; margin: 48px 0 24px; padding: 32px 36px; border: 1px solid rgba(227,77,77,0.3); box-shadow: 0 20px 35px -12px black; transition: transform 0.6s cubic-bezier(0.2,0.9,0.4,1.1); }
+    .mega-content { flex: 2; }
+    .mega-icon { font-size: 4rem; color: #e34d4d; margin-bottom: 16px; }
+    .mega-banner h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 12px; }
+    .mega-banner .meta { color: #9aa7b9; margin-bottom: 16px; display: flex; gap: 20px; }
+    .mega-banner p { color: #cbd5e6; margin-bottom: 24px; line-height: 1.5; }
+    .mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 60px; transition: transform 0.6s cubic-bezier(0.2,0.9,0.4,1.1); }
+    .mini-card { background: #121517; border-radius: 24px; padding: 20px; border: 1px solid rgba(227,77,77,0.2); transition: all 0.2s; }
+    .mini-card:hover { border-color: #e34d4d; background: #181c1f; transform: translateY(-4px); }
+    .mini-card h3 { font-size: 1.3rem; margin: 8px 0; }
+    .mini-card .mini-meta { font-size: 0.75rem; color: #8e9aaf; margin-bottom: 8px; }
+    .search-container { margin: 40px 0 20px; transition: transform 0.6s cubic-bezier(0.2,0.9,0.4,1.1); }
+    #searchInput { width: 100%; max-width: 400px; padding: 12px 20px; background: #121517; border: 1px solid rgba(227,77,77,0.4); border-radius: 40px; color: #eef2f5; font-size: 1rem; transition: 0.2s; }
+    #searchInput:focus { outline: none; border-color: #e34d4d; }
+    .section { padding: 80px 0 70px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 600; margin-bottom: 48px; position: relative; display: inline-block; transition: transform 0.6s cubic-bezier(0.2,0.9,0.4,1.1); }
+    .section-title:after { content: ''; position: absolute; bottom: -14px; left: 0; width: 70px; height: 3px; background: #e34d4d; border-radius: 3px; }
+    .horizontal-scroll { display: flex; overflow-x: auto; gap: 30px; padding-bottom: 15px; scrollbar-width: thin; }
+    .horizontal-scroll .card { flex: 0 0 320px; margin-bottom: 0; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
+    .card { background: #121517; border-radius: 28px; padding: 28px; border: 1px solid rgba(227,77,77,0.2); box-shadow: 0 18px 30px -12px rgba(0,0,0,0.5); opacity: 0; transform: translateY(25px); transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s, border 0.3s; }
+    .card.visible { opacity: 1; transform: translateY(0); }
+    .card:hover { transform: translateY(-6px); border-color: #e34d4d; background: #181c1f; }
+    .card-icon { font-size: 2.5rem; color: #e34d4d; margin-bottom: 20px; }
+    .card-category { font-size: 0.7rem; text-transform: uppercase; font-weight: 600; letter-spacing: 1.5px; background: rgba(227,77,77,0.2); padding: 5px 12px; border-radius: 40px; display: inline-block; margin-bottom: 16px; color: #e07a6a; }
+    .card h3 { font-size: 1.7rem; font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+    .card .meta { font-size: 0.85rem; color: #8e9aaf; margin-bottom: 16px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .rating { color: #e34d4d; font-weight: 600; }
+    .card p { color: #cbd5e6; margin-bottom: 22px; line-height: 1.5; }
+    .btn-outline { background: transparent; border: 1px solid #e34d4d; color: #e34d4d; padding: 8px 24px; border-radius: 40px; font-weight: 500; font-size: 0.85rem; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline:hover { background: #e34d4d; color: #0a0c0e; }
+    .about-wrapper { display: flex; flex-wrap: wrap; gap: 56px; align-items: center; }
+    .about-text { flex: 2; }
+    .about-text h3 { font-size: 2rem; font-family: 'Playfair Display', serif; margin-bottom: 20px; }
+    .about-text p { margin-bottom: 20px; color: #cbd5e6; }
+    .about-icon { flex: 1; text-align: center; background: linear-gradient(145deg, #151a1e, #0a0c0e); padding: 42px 20px; border-radius: 48px; border: 1px solid #2a2f33; }
+    .about-icon i { font-size: 5rem; color: #e34d4d; margin-bottom: 16px; }
+    .quote { margin-top: 28px; border-left: 4px solid #e34d4d; padding-left: 24px; font-style: italic; color: #e0cba0; }
+    .footer { background: #050708; padding: 52px 0 36px; text-align: center; border-top: 1px solid rgba(227,77,77,0.4); }
+    .socials { display: flex; justify-content: center; gap: 32px; margin-bottom: 28px; }
+    .socials a { color: #9aa7b9; font-size: 1.6rem; transition: 0.2s; }
+    .socials a:hover { color: #e34d4d; transform: translateY(-4px); }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); backdrop-filter: blur(10px); justify-content: center; align-items: center; z-index: 2000; }
+    .modal-content { background: #121517; max-width: 800px; width: 90%; max-height: 85vh; overflow-y: auto; padding: 32px 36px; border-radius: 36px; border-top: 5px solid #e34d4d; }
+    .modal-content h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; }
+    .modal-content p { margin-bottom: 1.2rem; line-height: 1.65; color: #dee4ed; }
+    .close-modal { background: #e34d4d; border: none; padding: 10px 28px; border-radius: 50px; font-weight: 600; cursor: pointer; margin-top: 20px; color: #0a0c0e; }
+    .machiavelli-button { position: fixed; bottom: 24px; right: 24px; width: 68px; height: 68px; background: #1e1a16; border-radius: 50%; box-shadow: 0 0 0 2px #e34d4d; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1500; transition: transform 0.2s, background 0.2s, left 0.2s, top 0.2s; animation: levitate 3s infinite ease-in-out; border: none; }
+    .machiavelli-button i { font-size: 2.2rem; color: #e34d4d; }
+    .machiavelli-button:hover { transform: scale(1.05); background: #2c241e; }
+    @keyframes levitate { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
+    .toast { position: fixed; bottom: 100px; right: 30px; background: #1e1a16; backdrop-filter: blur(10px); color: #f0e6d8; padding: 12px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border-left: 4px solid #e34d4d; z-index: 1600; opacity: 0; transform: translateX(30px); transition: opacity 0.2s, transform 0.2s; pointer-events: none; max-width: 280px; }
+    .toast.show { opacity: 1; transform: translateX(0); }
+    .secret-menu { position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: #121517dd; backdrop-filter: blur(16px); border-left: 2px solid #e34d4d; z-index: 2000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 80px 20px 20px; gap: 20px; box-shadow: -5px 0 20px rgba(0,0,0,0.5); }
+    .secret-menu.active { right: 0; }
+    .secret-menu a { color: #f0e6d8; text-decoration: none; font-size: 1.1rem; padding: 10px 15px; border-radius: 40px; transition: 0.2s; display: block; text-align: center; }
+    .secret-menu a:hover { background: #e34d4d; color: #0a0c0e; }
+    .close-menu-btn { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #e34d4d; font-size: 1.8rem; cursor: pointer; }
+    .bottom-panel { position: fixed; bottom: -300px; left: 0; width: 100%; background: #121517dd; backdrop-filter: blur(16px); border-top: 2px solid #e34d4d; z-index: 2001; transition: bottom 0.3s ease; padding: 20px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+    .bottom-panel.active { bottom: 0; }
+    .panel-header { display: flex; justify-content: flex-end; }
+    .close-panel-btn { background: transparent; border: none; color: #e34d4d; font-size: 1.8rem; cursor: pointer; }
+    .panel-title { font-size: 1.2rem; margin-bottom: 10px; text-align: center; color: #e34d4d; }
+    .panel-buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .panel-btn { background: transparent; border: 1px solid #e34d4d; color: #e34d4d; padding: 8px 16px; border-radius: 40px; cursor: pointer; transition: 0.2s; font-weight: 500; }
+    .panel-btn:hover { background: #e34d4d; color: #0a0c0e; }
+    body.gravity-mode .header { position: relative; top: 0; }
+    body.gravity-mode .header, body.gravity-mode .hero, body.gravity-mode .mega-banner, body.gravity-mode .mini-grid, body.gravity-mode .section-title, body.gravity-mode .search-container, body.gravity-mode .machiavelli-button { transform: translateY(0); transition: transform 0.6s cubic-bezier(0.2,0.9,0.4,1.1); cursor: grab; }
+    body.gravity-mode .header:active, body.gravity-mode .hero:active, body.gravity-mode .mega-banner:active, body.gravity-mode .mini-grid:active, body.gravity-mode .section-title:active, body.gravity-mode .search-container:active, body.gravity-mode .machiavelli-button:active { cursor: grabbing; }
+    #gravity-reset-btn { position: fixed; bottom: 20px; left: 20px; z-index: 2001; background: #e34d4d; color: #0a0c0e; border: none; padding: 8px 16px; border-radius: 40px; cursor: pointer; font-weight: bold; display: none; }
+    body.gravity-mode #gravity-reset-btn { display: block; }
+    body.florence-theme { --bg-main: #ffffff; --bg-header: rgba(255,255,255,0.96); --border-color: #cc0000; --card-bg: #fff9f0; --card-hover-bg: #fffbee; --text-main: #1a1a1a; --text-secondary: #2c2c2c; --accent: #b22222; --accent-hover: #8b0000; --category-bg: rgba(178,34,34,0.1); --category-text: #b22222; --like-color: #b22222; --scrollbar-thumb: #b22222; --button-hover-text: #ffffff; }
+    body.florence-theme .logo a { background: linear-gradient(145deg, #b22222, #ffcc00); background-clip: text; -webkit-background-clip: text; }
+    body.florence-theme .machiavelli-button { background: #fff9f0; box-shadow: 0 0 0 2px #b22222; }
+    body.florence-theme .machiavelli-button i { color: #b22222; }
+    body.florence-theme .hero { background: #fff9f0; }
+    body.florence-theme .hero h1 { background: linear-gradient(145deg, #b22222, #ffcc00); background-clip: text; -webkit-background-clip: text; }
+    body.florence-theme .card { background: #fff9f0; border-color: #ffcc00; }
+    body.florence-theme .card:hover { background: #fffbee; }
+    body.florence-theme .btn-outline { border-color: #b22222; color: #b22222; }
+    body.florence-theme .btn-outline:hover { background: #b22222; color: white; }
+    body.florence-theme .progress-bar { background: #b22222; }
+    body.florence-theme .toast { background: #fff9f0; color: #1a1a1a; border-left-color: #b22222; }
+    body.florence-theme .secret-menu a:hover { background: #b22222; color: white; }
+    body.florence-theme .bottom-panel .panel-btn { border-color: #b22222; color: #b22222; }
+    body.florence-theme .bottom-panel .panel-btn:hover { background: #b22222; color: white; }
+    .cookie-consent { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 500px; background: #1e1a16; border-left: 4px solid #e34d4d; border-radius: 16px; padding: 20px; z-index: 3000; box-shadow: 0 10px 25px rgba(0,0,0,0.5); backdrop-filter: blur(8px); }
+    .cookie-consent p { margin-bottom: 16px; font-size: 0.9rem; color: #f0e6d8; }
+    .cookie-buttons { display: flex; gap: 12px; justify-content: flex-end; }
+    .cookie-btn { background: transparent; border: 1px solid #e34d4d; color: #e34d4d; padding: 6px 16px; border-radius: 40px; cursor: pointer; transition: 0.2s; font-weight: 500; }
+    .cookie-btn:hover { background: #e34d4d; color: #0a0c0e; }
+    .saw-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 10000; }
+    .saw-modal-content { background: #121517; max-width: 500px; width: 90%; padding: 28px; border-radius: 24px; border-top: 4px solid #e34d4d; text-align: center; box-shadow: 0 0 30px rgba(227,77,77,0.5); }
+    .saw-modal-content h3 { font-size: 1.8rem; margin-bottom: 16px; color: #e34d4d; }
+    .saw-options { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+    .saw-option { background: #1e1a16; border: 1px solid #e34d4d; color: #f0e6d8; padding: 10px; border-radius: 40px; cursor: pointer; transition: 0.2s; text-align: center; }
+    .saw-option:hover { background: #e34d4d; color: #0a0c0e; }
+    .saw-timer { font-size: 1.4rem; font-weight: bold; margin: 20px 0; }
+    .saw-timer span { color: #e34d4d; font-size: 2rem; }
+    @media (max-width: 780px) { .secret-menu { width: 260px; } .hero h1 { font-size: 2.5rem; } .section-title { font-size: 2rem; } .mini-grid { grid-template-columns: 1fr; gap: 20px; } .horizontal-scroll .card { flex: 0 0 280px; } .modal-content { padding: 24px; } .machiavelli-button { width: 56px; height: 56px; bottom: 16px; right: 16px; } .machiavelli-button i { font-size: 1.8rem; } .toast { bottom: 90px; right: 20px; } .cookie-consent { width: 90%; padding: 16px; bottom: 20px; } .saw-modal-content { width: 95%; padding: 20px; } }
   </style>
 </head>
-<body>
+<body class="theme-burgundy">
 <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
 <header class="header">
   <div class="container nav-wrapper">
@@ -612,33 +150,19 @@
   </div>
 </header>
 <main>
-  <section id="home" class="hero">
-    <div class="container">
-      <h1>Makiavello</h1>
-      <p>Рецензии, которые не боятся власти. Живопись, музыка, книги — искусство как поле битвы.</p>
-      <div class="tagline">«Никколо Макиавелли одобрил бы это читалище»</div>
-    </div>
-  </section>
+  <section id="home" class="hero"><div class="container"><h1>Makiavello</h1><p>Рецензии, которые не боятся власти. Живопись, музыка, книги — искусство как поле битвы.</p><div class="tagline">«Никколо Макиавелли одобрил бы это читалище»</div></div></section>
   <div class="container">
-    <div class="mega-banner">
-      <div class="mega-content">
-        <div class="mega-icon"><i class="fas fa-crown"></i></div>
-        <h2>«Государь»: учебник цинизма</h2>
-        <div class="meta"><span>Paullknya · 8 мин чтения</span><span class="rating"><i class="fas fa-star"></i> 10/10</span></div>
-        <p>Как Макиавелли учит власти без морали — и почему это важно для искусства.</p>
-        <button class="btn-outline read-btn" data-title="«Государь»: учебник цинизма" data-text="<p><strong>Почему «Государь» — не инструкция для тирана, а зеркало для эпохи.</strong> Макиавелли писал в изгнании, наблюдая за итальянскими княжествами. Его советы жестоки, но честны. Он не морализирует, а описывает реальность.</p>"><i class="fas fa-scroll"></i> Читать</button>
-      </div>
-    </div>
+    <div class="mega-banner"><div class="mega-content"><div class="mega-icon"><i class="fas fa-crown"></i></div><h2>«Государь»: учебник цинизма</h2><div class="meta"><span>Paullknya · 8 мин чтения</span><span class="rating"><i class="fas fa-star"></i> 10/10</span></div><p>Как Макиавелли учит власти без морали — и почему это важно для искусства.</p><button class="btn-outline read-btn" data-title="«Государь»: учебник цинизма" data-text="<p><strong>Почему «Государь» — не инструкция для тирана, а зеркало для эпохи.</strong> Макиавелли писал в изгнании, наблюдая за итальянскими княжествами. Его советы жестоки, но честны. Он не морализирует, а описывает реальность.</p>"><i class="fas fa-scroll"></i> Читать</button></div></div>
     <div class="mini-grid">
       <div class="mini-card"><div class="card-category">Коротко</div><h3>Караваджо: панк живописи</h3><div class="mini-meta">2 мин · 9/10</div><p>Грязь под ногтями и небесный свет.</p><button class="btn-outline read-btn" data-title="Караваджо: панк живописи" data-text="<p>Микеланджело Меризи да Караваджо использовал проституток для образа Мадонны, а себя рисовал в виде отрубленной головы Голиафа. Его свет выхватывает не святость, а пот, грязь и страх.</p>"><i class="fas fa-scroll"></i> Читать</button></div>
-      <div class="mini-card"><div class="card-category">Коротко</div><h3>«Анна Каренина»: страсть и поезд</h3><div class="mini-meta">3 мин · 9/10</div><p>Женщина против системы.</p><button class="btn-outline read-btn" data-title="Анна Каренина: страсть и поезد" data-text="<p>Анна разбивается не о поезд, а о невозможность быть свободной. Каренин — система, Вронский — нарцисс. Толстой не моралист, он хирург.</p>"><i class="fas fa-scroll"></i> Читать</button></div>
+      <div class="mini-card"><div class="card-category">Коротко</div><h3>«Анна Каренина»: страсть и поезد</h3><div class="mini-meta">3 мин · 9/10</div><p>Женщина против системы.</p><button class="btn-outline read-btn" data-title="Анна Каренина: страсть и поезد" data-text="<p>Анна разбивается не о поезд, а о невозможность быть свободной. Каренин — система, Вронский — нарцисс. Толстой не моралист, он хирург.</p>"><i class="fas fa-scroll"></i> Читать</button></div>
       <div class="mini-card"><div class="card-category">Коротко</div><h3>«Чёрный квадрат»: пустота</h3><div class="mini-meta">2 мин · 8/10</div><p>Малевич и конец искусства.</p><button class="btn-outline read-btn" data-title="Чёрный квадрат: пустота" data-text="<p>Малевич создал новый алфавит: ноль форм, абсолютная тишина. Квадрат оказался пророческим — искусство может стоять на грани исчезновения и кричать громче всех.</p>"><i class="fas fa-scroll"></i> Читать</button></div>
     </div>
   </div>
-  <section id="charts" class="section">
+    <section id="charts" class="section">
     <div class="container">
       <h2 class="section-title">Топ-чарты: лучшие рецензии</h2>
-      <div class="horizontal-scroll" id="chartsScroll">
+      <div class="horizontal-scroll">
         <div class="card">
           <div class="card-icon"><i class="fas fa-trophy"></i></div>
           <span class="card-category">#1</span>
@@ -673,8 +197,489 @@
     <div class="container">
       <h2 class="section-title">Рецензии</h2>
       <div class="cards-grid" id="reviewsGrid">
-        <div class="card" data-title="Страшный суд · Микеланджело">
+        <div class="card">
           <div class="card-icon"><i class="fas fa-palette"></i></div>
           <span class="card-category">Живопись</span>
           <h3>Страшный суд · Микеланджело</h3>
-          <div class="meta"><span>1536–1541</span><span class="rating"
+          <div class="meta"><span>1536–1541</span><span class="rating"><i class="fas fa-star"></i> 9.5/10</span></div>
+          <p>Фреска, где мускулы святых хлещут по глазам, а адские лодки Харона смахивают на политическую карикатуру...</p>
+          <button class="btn-outline read-btn" data-title="Страшный суд · Микеланджело" data-text="<p>Когда папа Павел III увидел «Страшный суд», он упал на колени. Не от святости — от ужаса. Микеланджело написал Христа не милующим. Макиавелли бы понял: власть не может быть мягкой. «Страшный суд» — это не фреска, это пощёчина.</p>"><i class="fas fa-scroll"></i> Читать</button>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-music"></i></div>
+          <span class="card-category">Музыка</span>
+          <h3>The Dark Side of the Moon</h3>
+          <div class="meta"><span>Pink Floyd · 1973</span><span class="rating"><i class="fas fa-star"></i> 10/10</span></div>
+          <p>Психоделическая опера о том, как деньги, безумие и время разрывают человека на части...</p>
+          <button class="btn-outline read-btn" data-title="The Dark Side of the Moon" data-text="<p>Кассовые аппараты в начале «Money» — самый точный звук XX века. Pink Floyd записали не просто альбом, а учебник по акустической шизофрении. Вердикт: 10/10. Слушать на виниле, в темноте.</p>"><i class="fas fa-scroll"></i> Читать</button>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-book-open"></i></div>
+          <span class="card-category">Книги</span>
+          <h3>1984 · Джордж Оруэлл</h3>
+          <div class="meta"><span>1949</span><span class="rating"><i class="fas fa-star"></i> 9.8/10</span></div>
+          <p>Страшнее всего в «1984» не пыточные комнаты, а то, как легко язык превращается в тюрьму...</p>
+          <button class="btn-outline read-btn" data-title="1984 · Джордж Оруэлл" data-text="<p>Большинство читателей боится Большого Брата. Но настоящий кошмар — это двумысл. «Война — это мир. Свобода — это рабство. Незнание — сила». Мораль Макиавелли: если хочешь сохранить власть над собой — пиши.</p>"><i class="fas fa-scroll"></i> Читать</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="articles" class="section">
+    <div class="container">
+      <h2 class="section-title">Статьи</h2>
+      <div class="cards-grid" id="articlesGrid">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-crown"></i></div>
+          <span class="card-category">Политика & Искусство</span>
+          <h3>Макиавелли и художники</h3>
+          <div class="meta">12 мин чтения</div>
+          <p>Как флорентийский дипломат объясняет жестокость Караваджо, интриги Бернини...</p>
+          <button class="btn-outline read-btn" data-title="Макиавелли и художники" data-text="<p><strong>Урок 1.</strong> Лучше, чтобы тебя боялись, чем любили. Караваджо не искал покровительства — он рубил правду-матку.</p><p><strong>Урок 2.</strong> Лиса и лев. Рафаэль был львом, Микеланджело — лисой.</p>"><i class="fas fa-scroll"></i> Читать</button>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-guitar"></i></div>
+          <span class="card-category">Музыкальная философия</span>
+          <h3>Симфония диссонанса</h3>
+          <div class="meta">8 мин чтения</div>
+          <p>От Бетховена до Rage Against the Machine: как музыка становилась формой неповиновения...</p>
+          <button class="btn-outline read-btn" data-title="Симфония диссонанса" data-text="<p>Когда Бетховен вычеркнул посвящение Наполеону из «Героической симфонии», он совершил жест, равный публичному плевку. Шостакович прятал коды в симфониях. Рейдженс против машины — гитара как оружие.</p>"><i class="fas fa-scroll"></i> Читать</button>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-landmark"></i></div>
+          <span class="card-category">Литературоведение</span>
+          <h3>Роман как зеркало тирании</h3>
+          <div class="meta">10 мин чтения</div>
+          <p>От «Процесса» Кафки до «Повелителя мух». Как литература обнажает механизмы власти...</p>
+          <button class="btn-outline read-btn" data-title="Роман как зеркало тирании" data-text="<p>Кафка не писал про бюрократию — он писал про экзистенциальный ужас человека, который даже не знает, в чём его обвиняют. «Повелитель мух» Голдинга: дети на острове создают культ и убийство.</p>"><i class="fas fa-scroll"></i> Читать</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-wrapper">
+        <div class="about-text"><h3>Paullknya — созерцатель власти в искусстве</h3><p>Историк искусства, независимый критик. Мои тексты — это всегда попытка залезть под кожу картины, сонаты или романа.</p><div class="quote">«Хорошая рецензия должна ранить. Как удар кинжалом — коротко и со смыслом».</div></div>
+        <div class="about-icon"><i class="fas fa-feather-alt"></i><h4>Paullknya</h4><p style="color:#e34d4d;">✧ критик, эссеист ✧</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer"><div class="container"><div class="socials"><a href="#" id="telegramLink"><i class="fab fa-telegram"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div><p>© 2025 Makiavello — рецензии на искусство. Проект Paullknya.</p></div></footer>
+<div id="modal" class="modal"><div class="modal-content" id="modalContent"></div></div>
+<button class="machiavelli-button" id="machiavelliBtn"><i class="fas fa-mask"></i></button>
+<button id="gravity-reset-btn">🔄 Сбросить гравитацию</button>
+<div id="cookieConsent" class="cookie-consent" style="display: none;">
+  <p>🍪 <strong>Внимание, подданный!</strong> Этот сайт использует файлы cookie, чтобы тайно манипулировать вашими решениями. Нажимая «Принять», вы соглашаетесь стать марионеткой в руках государя.</p>
+  <div class="cookie-buttons"><button id="cookieAccept" class="cookie-btn">Принять</button><button id="cookieDecline" class="cookie-btn">Отказаться</button></div>
+</div>
+<div id="secretMenu" class="secret-menu">
+  <button class="close-menu-btn" id="closeSecretMenuBtn">✕</button>
+  <a href="#" id="secretDrafts">📓 Черновики</a>
+  <a href="#" id="secretForbidden">🚫 Запретная полка</a>
+  <a href="#" id="secretExit">👤 Выйти из тени</a>
+  <a href="#" id="secretRun">🎭 Убегающая маска</a>
+  <a href="#" id="secretTheatre">🎭 Театр абсурда</a>
+</div>
+<div id="bottomPanel" class="bottom-panel">
+  <div class="panel-header"><button class="close-panel-btn" id="closeBottomPanelBtn">✕</button></div>
+  <div class="panel-title">Управление</div>
+  <div class="panel-buttons">
+    <button id="resetAllBtn" class="panel-btn">🔄 Сбросить всё</button>
+    <button id="themeBurgundyBtn" class="panel-btn">🍷 Бардовая</button>
+    <button id="themeBlackBtn" class="panel-btn">🖤 Чёрная</button>
+    <button id="themeBlueBtn" class="panel-btn">🌙 Синяя</button>
+  </div>
+</div>
+<div id="sawModal" class="saw-modal">
+  <div class="saw-modal-content">
+    <h3>🔪 Хочешь поиграть?</h3>
+    <p><strong>Я — Никколо Пила.</strong> Реши уравнение власти, или сайт умрёт навсегда (до перезагрузки).</p>
+    <p>Вопрос: Что, согласно Макиавелли, лучше для государя?</p>
+    <div class="saw-options">
+      <div class="saw-option" data-answer="love">А) Чтобы его любили</div>
+      <div class="saw-option" data-answer="fear">Б) Чтобы его боялись</div>
+      <div class="saw-option" data-answer="respect">В) Чтобы его уважали</div>
+      <div class="saw-option" data-answer="worship">Г) Чтобы его боготворили</div>
+    </div>
+    <div class="saw-timer">Осталось <span id="sawTimer">20</span> секунд</div>
+  </div>
+</div>
+<script>
+  (function() {
+    // ---------- БАЗОВЫЕ ФУНКЦИИ ----------
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    if (menuBtn && navLinks) {
+      menuBtn.addEventListener('click', (e) => { e.stopPropagation(); navLinks.classList.toggle('active'); });
+      document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === "#" || href === "") return;
+        const target = document.querySelector(href);
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+    function showModal(title, htmlText) {
+      modalContent.innerHTML = `<h2>${escapeHtml(title)}</h2><div>${htmlText}</div><button class="close-modal" id="closeModalBtn">✕ Закрыть</button>`;
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      document.getElementById('closeModalBtn').addEventListener('click', hideModal);
+    }
+    function hideModal() { modal.style.display = 'none'; document.body.style.overflow = ''; }
+    modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+    document.querySelectorAll('.read-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const title = btn.getAttribute('data-title');
+        const text = btn.getAttribute('data-text');
+        if (title && text) showModal(title, text);
+        else alert('Текст скоро появится.');
+      });
+    });
+    const sections = document.querySelectorAll('section[id]');
+    function setActiveNav() {
+      let current = '';
+      const scrollPos = window.scrollY + 120;
+      sections.forEach(section => { const top = section.offsetTop, height = section.offsetHeight; if (scrollPos >= top && scrollPos < top+height) current = section.id; });
+      document.querySelectorAll('.nav-link').forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === `#${current}` && current) link.classList.add('active'); });
+      if (window.scrollY < 100) { document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); const homeLink = document.querySelector('a[href="#home"]'); if (homeLink) homeLink.classList.add('active'); }
+    }
+    window.addEventListener('scroll', setActiveNav);
+    window.addEventListener('load', setActiveNav);
+    document.getElementById('telegramLink').href = '#';
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => { const st = window.scrollY, dh = document.documentElement.scrollHeight - window.innerHeight; progressBar.style.width = (st / dh) * 100 + '%'; });
+    const quotes = ["«Цель оправдывает средства» — Никколо Макиавелли","«Государь должен внушать страх, но не ненависть»","«Искусство без власти — просто красивая картинка»","«Лучше, чтобы тебя боялись, чем любили»","«Война — это искусство уничтожать, живопись — искусство сохранять власть»"];
+    let toastTimeout;
+    const toast = document.createElement('div'); toast.className = 'toast'; document.body.appendChild(toast);
+    function showToast(msg, duration=4000) { toast.innerText = msg; toast.classList.add('show'); if (toastTimeout) clearTimeout(toastTimeout); toastTimeout = setTimeout(() => toast.classList.remove('show'), duration); }
+    document.getElementById('machiavelliBtn').addEventListener('click', () => showToast(quotes[Math.floor(Math.random() * quotes.length)]));
+    const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.15 });
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+    const searchInput = document.getElementById('searchInput');
+    const reviewsCards = document.querySelectorAll('#reviewsGrid .card');
+    const articlesCards = document.querySelectorAll('#articlesGrid .card');
+    function filterCards() {
+      const query = searchInput.value.toLowerCase().trim();
+      const allCards = [...reviewsCards, ...articlesCards];
+      allCards.forEach(card => {
+        const titleElem = card.querySelector('h3');
+        const categoryElem = card.querySelector('.card-category');
+        const descElem = card.querySelector('p');
+        const title = titleElem ? titleElem.innerText.toLowerCase() : '';
+        const category = categoryElem ? categoryElem.innerText.toLowerCase() : '';
+        const desc = descElem ? descElem.innerText.toLowerCase() : '';
+        if (query === '' || title.includes(query) || category.includes(query) || desc.includes(query)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    if (searchInput) searchInput.addEventListener('input', filterCards);
+
+    // ---------- ГРАВИТАЦИЯ ----------
+    let gravityActive = false;
+    const gravityResetBtn = document.getElementById('gravity-reset-btn');
+    let dragItem = null, dragStartX = 0, dragStartY = 0, itemStartX = 0, itemStartY = 0;
+    function enableGravity() {
+      if (gravityActive) return;
+      gravityActive = true;
+      document.body.classList.add('gravity-mode');
+      const items = [document.querySelector('.header'), document.querySelector('.hero'), document.querySelector('.mega-banner'), document.querySelector('.mini-grid'), ...document.querySelectorAll('.section-title'), document.querySelector('.search-container'), document.getElementById('machiavelliBtn')].filter(el => el);
+      items.forEach(el => {
+        const fallDistance = 100 + Math.random() * 250;
+        el.style.transform = `translateY(${fallDistance}px)`;
+        el.style.transition = 'transform 0.6s cubic-bezier(0.2,0.9,0.4,1.1)';
+        setTimeout(() => {
+          el.style.transition = '';
+          el.style.cursor = 'grab';
+          el.addEventListener('mousedown', startDrag);
+          el.addEventListener('touchstart', startDrag, { passive: false });
+        }, 600);
+      });
+      showToast("🌍 Гравитация Макиавелли активирована! Шапка и всё падает. Тащи их пальцем.", 5000);
+    }
+    function disableGravity() { if (gravityActive) { gravityActive = false; document.body.classList.remove('gravity-mode'); location.reload(); } }
+    function startDrag(e) {
+      if (!gravityActive) return;
+      e.preventDefault();
+      dragItem = e.target.closest('.header, .hero, .mega-banner, .mini-grid, .section-title, .search-container, .machiavelli-button');
+      if (!dragItem) return;
+      let clientX, clientY;
+      if (e.type === 'mousedown') { clientX = e.clientX; clientY = e.clientY; }
+      else { clientX = e.touches[0].clientX; clientY = e.touches[0].clientY; }
+      const rect = dragItem.getBoundingClientRect();
+      dragStartX = clientX - rect.left; dragStartY = clientY - rect.top;
+      itemStartX = rect.left; itemStartY = rect.top;
+      window.addEventListener('mousemove', onDrag);
+      window.addEventListener('mouseup', stopDrag);
+      window.addEventListener('touchmove', onDrag, { passive: false });
+      window.addEventListener('touchend', stopDrag);
+    }
+    function onDrag(e) {
+      if (!dragItem) return;
+      e.preventDefault();
+      let clientX, clientY;
+      if (e.type === 'mousemove') { clientX = e.clientX; clientY = e.clientY; }
+      else { clientX = e.touches[0].clientX; clientY = e.touches[0].clientY; }
+      const newLeft = clientX - dragStartX; const newTop = clientY - dragStartY;
+      dragItem.style.position = 'relative'; dragItem.style.left = (newLeft - itemStartX) + 'px'; dragItem.style.top = (newTop - itemStartY) + 'px'; dragItem.style.zIndex = '1000';
+    }
+    function stopDrag() { dragItem = null; window.removeEventListener('mousemove', onDrag); window.removeEventListener('mouseup', stopDrag); window.removeEventListener('touchmove', onDrag); window.removeEventListener('touchend', stopDrag); }
+    let lastShake = 0;
+    if (window.DeviceMotionEvent) {
+      window.addEventListener('devicemotion', function(e) {
+        const acc = e.accelerationIncludingGravity;
+        if (!acc) return;
+        const magnitude = Math.abs(acc.x) + Math.abs(acc.y) + Math.abs(acc.z);
+        if (magnitude > 12 && !gravityActive) {
+          const now = Date.now();
+          if (now - lastShake > 3000) { lastShake = now; enableGravity(); }
+        }
+      });
+    }
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        if (e.target.value.trim().toLowerCase() === 'gravity' && !gravityActive) { enableGravity(); e.target.value = ''; }
+      });
+    }
+    gravityResetBtn.addEventListener('click', () => { if (gravityActive) disableGravity(); });
+
+    // ---------- ФЛОРЕНЦИЯ ----------
+    let florenceTimeout = null;
+    function applyFlorenceTheme() {
+      if (document.body.classList.contains('florence-theme')) return;
+      if (florenceTimeout) clearTimeout(florenceTimeout);
+      document.body.classList.add('florence-theme');
+      // ---------- ФЛОРЕНЦИЯ (продолжение) ----------
+      showToast("🇮🇹 Герб Флоренции активирован! Красно-бело-золотой стиль на 10 секунд.", 3000);
+      florenceTimeout = setTimeout(() => {
+        document.body.classList.remove('florence-theme');
+        showToast("🌑 Возвращение к тёмной эстетике Makiavello.", 2000);
+        florenceTimeout = null;
+      }, 10000);
+    }
+    function removeFlorenceTheme() {
+      if (document.body.classList.contains('florence-theme')) {
+        document.body.classList.remove('florence-theme');
+        if (florenceTimeout) clearTimeout(florenceTimeout);
+        florenceTimeout = null;
+      }
+    }
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const val = e.target.value.trim().toLowerCase();
+        if (val === "флоренция" || val === "florence") applyFlorenceTheme();
+      });
+    }
+
+    // ---------- УБЕГАЮЩАЯ МАСКА ----------
+    const mask = document.getElementById('machiavelliBtn');
+    let running = false, runInterval = null;
+    let originalPos = { bottom: '24px', right: '24px' };
+    function saveOriginalPosition() {
+      originalPos.bottom = mask.style.bottom || getComputedStyle(mask).bottom;
+      originalPos.right = mask.style.right || getComputedStyle(mask).right;
+    }
+    function resetMaskPosition() {
+      mask.style.position = 'fixed'; mask.style.bottom = originalPos.bottom; mask.style.right = originalPos.right;
+      mask.style.left = ''; mask.style.top = ''; mask.style.transform = '';
+    }
+    function startRunning() {
+      if (running) return;
+      saveOriginalPosition(); running = true; mask.style.transition = 'left 0.4s ease, top 0.4s ease';
+      function moveRandomly() {
+        if (!running) return;
+        const w = window.innerWidth - mask.offsetWidth, h = window.innerHeight - mask.offsetHeight;
+        mask.style.position = 'fixed'; mask.style.left = Math.random() * w + 'px'; mask.style.top = Math.random() * h + 'px';
+        mask.style.bottom = ''; mask.style.right = '';
+      }
+      moveRandomly(); runInterval = setInterval(moveRandomly, 500);
+      showToast("🏃 Маска убегает! Попробуй поймать (нажми на неё) или останови в меню.", 4000);
+    }
+    function stopRunning() {
+      if (!running) return; clearInterval(runInterval); runInterval = null; running = false;
+      resetMaskPosition(); mask.style.transition = ''; showToast("🛑 Маска вернулась на место. Ты поймал её!", 3000);
+    }
+    mask.addEventListener('click', (e) => { if (running) { e.stopPropagation(); stopRunning(); } });
+
+    // ---------- ШТОРКА СПРАВА ----------
+    const secretMenuDiv = document.getElementById('secretMenu');
+    const closeSecretBtn = document.getElementById('closeSecretMenuBtn');
+    function openSecretMenu() { secretMenuDiv.classList.add('active'); }
+    function closeSecretMenu() { secretMenuDiv.classList.remove('active'); }
+    let pressTimer = null;
+    function startLongPress() { pressTimer = setTimeout(() => { openSecretMenu(); }, 800); }
+    function cancelLongPress() { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } }
+    mask.addEventListener('mousedown', startLongPress);
+    mask.addEventListener('mouseup', cancelLongPress);
+    mask.addEventListener('mouseleave', cancelLongPress);
+    mask.addEventListener('touchstart', startLongPress);
+    mask.addEventListener('touchend', cancelLongPress);
+    closeSecretBtn.addEventListener('click', closeSecretMenu);
+    document.addEventListener('click', (e) => {
+      if (secretMenuDiv.classList.contains('active') && !secretMenuDiv.contains(e.target) && e.target !== mask) {
+        closeSecretMenu();
+      }
+    });
+    document.getElementById('secretDrafts')?.addEventListener('click', (e) => { e.preventDefault(); showToast('📓 Черновиков пока нет. Напиши что-нибудь крамольное.', 3000); closeSecretMenu(); });
+    document.getElementById('secretForbidden')?.addEventListener('click', (e) => { e.preventDefault(); showToast('🚫 Запретная полка пуста. Все рецензии уже и так на грани.', 3000); closeSecretMenu(); });
+    document.getElementById('secretExit')?.addEventListener('click', (e) => { e.preventDefault(); showToast('👤 Выйти из тени нельзя. Ты уже в ней.', 3000); closeSecretMenu(); });
+    const secretRunBtn = document.getElementById('secretRun');
+    if (secretRunBtn) secretRunBtn.addEventListener('click', (e) => { e.preventDefault(); if (running) stopRunning(); else startRunning(); closeSecretMenu(); });
+    const theatreBtn = document.getElementById('secretTheatre');
+    if (theatreBtn) theatreBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!document.body.classList.contains('florence-theme')) applyFlorenceTheme();
+      if (!gravityActive) enableGravity();
+      if (!running) startRunning();
+      showToast("🎭 Театр абсурда: Флоренция, гравитация и убегающая маска! Наслаждайтесь хаосом.", 5000);
+      closeSecretMenu();
+    });
+
+    // ---------- НИЖНЯЯ ШТОРКА ----------
+    const bottomPanel = document.getElementById('bottomPanel');
+    const closeBottomBtn = document.getElementById('closeBottomPanelBtn');
+    const logo = document.getElementById('logoLink');
+    function openBottomPanel() { bottomPanel.classList.add('active'); }
+    function closeBottomPanel() { bottomPanel.classList.remove('active'); }
+    logo.addEventListener('click', (e) => { e.preventDefault(); openBottomPanel(); });
+    closeBottomBtn.addEventListener('click', closeBottomPanel);
+    document.getElementById('resetAllBtn')?.addEventListener('click', () => {
+      if (running) stopRunning();
+      if (gravityActive) disableGravity();
+      removeFlorenceTheme();
+      const savedTheme = localStorage.getItem('makiavello_theme') || 'burgundy';
+      setTheme(savedTheme);
+      showToast("Все пасхалки сброшены. Сайт вернулся к обычному состоянию.", 3000);
+      closeBottomPanel();
+    });
+    const themeBtnsGlobal = document.querySelectorAll('.theme-btn');
+    function setTheme(themeName) {
+      if (document.body.classList.contains('florence-theme')) return;
+      document.body.classList.remove('theme-burgundy', 'theme-black', 'theme-blue');
+      document.body.classList.add(`theme-${themeName}`);
+      localStorage.setItem('makiavello_theme', themeName);
+      themeBtnsGlobal.forEach(btn => { if (btn.dataset.theme === themeName) btn.classList.add('active'); else btn.classList.remove('active'); });
+    }
+    const savedTheme = localStorage.getItem('makiavello_theme');
+    if (savedTheme && ['burgundy', 'black', 'blue'].includes(savedTheme)) setTheme(savedTheme);
+    else setTheme('burgundy');
+    document.getElementById('themeBurgundyBtn')?.addEventListener('click', () => { setTheme('burgundy'); closeBottomPanel(); });
+    document.getElementById('themeBlackBtn')?.addEventListener('click', () => { setTheme('black'); closeBottomPanel(); });
+    document.getElementById('themeBlueBtn')?.addEventListener('click', () => { setTheme('blue'); closeBottomPanel(); });
+
+    // ---------- ПАСХАЛКА "ПИЛА" (жестокая игра) ----------
+    const sawModal = document.getElementById('sawModal');
+    let sawTimerInterval = null;
+    function startSawGame() {
+      if (sawModal.style.display === 'flex') return;
+      sawModal.style.display = 'flex';
+      let timeLeft = 20;
+      const timerSpan = document.getElementById('sawTimer');
+      timerSpan.innerText = timeLeft;
+      if (sawTimerInterval) clearInterval(sawTimerInterval);
+      sawTimerInterval = setInterval(() => {
+        timeLeft--;
+        timerSpan.innerText = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(sawTimerInterval);
+          sawTimerInterval = null;
+          sawModal.style.display = 'none';
+          executePunishment();
+        }
+      }, 1000);
+      const options = document.querySelectorAll('.saw-option');
+      const handler = (e) => {
+        const answer = e.currentTarget.getAttribute('data-answer');
+        if (answer === 'fear') {
+          clearInterval(sawTimerInterval);
+          sawTimerInterval = null;
+          sawModal.style.display = 'none';
+          showToast("🎉 Ты выжил. Пила одобряет. Иди читай рецензии.", 4000);
+          if (typeof window.confetti === 'function') window.confetti();
+          else { for(let i=0;i<50;i++){ setTimeout(()=>{ showToast("🎉",50); }, i*50); } }
+        } else {
+          clearInterval(sawTimerInterval);
+          sawTimerInterval = null;
+          sawModal.style.display = 'none';
+          showToast("❌ Неправильный ответ! Ты проиграл. Начинается казнь...", 3000);
+          setTimeout(() => { executePunishment(); }, 1500);
+        }
+        options.forEach(opt => opt.removeEventListener('click', handler));
+      };
+      options.forEach(opt => opt.addEventListener('click', handler));
+    }
+    function executePunishment() {
+      document.body.style.animation = 'shake 0.2s infinite';
+      const style = document.createElement('style');
+      style.textContent = '@keyframes shake { 0% { transform: translate(1px,1px); } 25% { transform: translate(-1px,-1px); } 50% { transform: translate(1px,-1px); } 75% { transform: translate(-1px,1px); } 100% { transform: translate(0,0); } }';
+      document.head.appendChild(style);
+      setTimeout(() => { document.body.style.animation = ''; }, 1000);
+      if (!gravityActive) enableGravity();
+      if (!running) startRunning();
+      const blocker = document.createElement('div');
+      blocker.style.position = 'fixed'; blocker.style.top = '0'; blocker.style.left = '0';
+      blocker.style.width = '100%'; blocker.style.height = '100%';
+      blocker.style.backgroundColor = 'rgba(0,0,0,0.7)'; blocker.style.zIndex = '10000';
+      blocker.style.display = 'flex'; blocker.style.alignItems = 'center'; blocker.style.justifyContent = 'center';
+      blocker.innerHTML = '<div style="background:#121517; padding:20px; border-radius:20px; border-top:4px solid #e34d4d; text-align:center;"><h3>☠️ КАЗНЬ</h3><p>Сайт умрёт через 5 секунд...</p></div>';
+      document.body.appendChild(blocker);
+      setTimeout(() => { location.reload(); }, 5000);
+    }
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const val = e.target.value.trim().toLowerCase();
+        if (val === 'пила' || val === 'saw' || val === 'игра') {
+          startSawGame();
+          e.target.value = '';
+        }
+      });
+    }
+
+    // ---------- COOKIE ПАРОДИЯ ----------
+    const cookieDiv = document.getElementById('cookieConsent');
+    if (!localStorage.getItem('makiavello_cookie_consent')) cookieDiv.style.display = 'block';
+    document.getElementById('cookieAccept')?.addEventListener('click', () => { localStorage.setItem('makiavello_cookie_consent', 'accepted'); cookieDiv.style.display = 'none'; showToast('🍪 Умный выбор. Государь доволен.', 3000); });
+    document.getElementById('cookieDecline')?.addEventListener('click', () => { localStorage.setItem('makiavello_cookie_consent', 'declined'); cookieDiv.style.display = 'none'; showToast('🍪 Свобода иллюзорна. Мы всё равно следим.', 3000); });
+
+    // ---------- ДОПОЛНИТЕЛЬНЫЕ ПАСХАЛКИ ----------
+    console.log("%c > Ты думал, я не замечу, как ты заглядываешь в мой код? Ладно, смотри, но не трогай. — Никколо Макиавелли (цифровой двойник)", "color: #e34d4d; font-size: 14px;");
+    let typed = []; const secretCode = 'makiavelli';
+    window.addEventListener('keydown', (e) => {
+      typed.push(e.key.toLowerCase());
+      if (typed.length > secretCode.length) typed.shift();
+      if (typed.join('') === secretCode) {
+        const cnt = parseInt(sessionStorage.getItem('makiavello_easter_egg_count') || '0');
+        if (cnt === 0) showToast('🎭 Ты нашёл пасхалку. Государь бы одобрил.', 4000);
+        else if (cnt === 1) showToast('🎭 Хватит баловаться, это не игра в кости.', 4000);
+        else showToast('🎭 Макиавелли устал от твоих фокусов.', 4000);
+        sessionStorage.setItem('makiavello_easter_egg_count', cnt+1);
+      }
+    });
+    let logoClickCount = 0, logoTimeout;
+    const logoElem = document.getElementById('logoLink');
+    if (logoElem) {
+      logoElem.addEventListener('click', (e) => {
+        logoClickCount++;
+        if (logoTimeout) clearTimeout(logoTimeout);
+        logoTimeout = setTimeout(() => { logoClickCount = 0; }, 5000);
+        if (logoClickCount === 10) {
+          showToast('🎭 Ты вызвал древний дух Макиавелли. Он просит не мешать.', 5000);
+          logoClickCount = 0;
+          let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+          link.type = 'image/x-icon'; link.rel = 'shortcut icon';
+          link.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎭</text></svg>';
+          document.head.appendChild(link);
+        }
+      });
+    }
+  })();
+</script>
+</body>
+</html>
